@@ -1,4 +1,5 @@
-const express = require('express');
+import express from 'express';
+import { Request, Response } from 'express';
 
 // Uses express to receive any JSON data sent to our server.
 const app = express();
@@ -12,6 +13,6 @@ app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
 
-app.get('/', (request, result) => {
+app.get('/', (request: Request, result: Response) => {
     result.send('Hello World');
 });
