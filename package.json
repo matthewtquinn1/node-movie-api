@@ -1,0 +1,22 @@
+{
+  "name": "movie-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/matthewtquinn1/node-movie-api.git"
+  },
+  "author": "Matthew Quinn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matthewtquinn1/node-movie-api/issues"
+  },
+  "homepage": "https://github.com/matthewtquinn1/node-movie-api#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
