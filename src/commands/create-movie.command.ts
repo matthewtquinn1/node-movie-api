@@ -1,6 +1,5 @@
-export interface Movie {
-    id: string;
+export interface CreateMovieCommand {
     name: string;
     description: string;
     rating: number;
-}
+} 
