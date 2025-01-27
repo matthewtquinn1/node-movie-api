@@ -2,31 +2,17 @@ import { Router } from "express";
 import { Request, Response } from 'express';
 import { Movie } from './../entities/movie';
 import { db } from './../database';
-import { CreateMovieCommand } from "../commands/create-movie.command";
-import { UpdateMovieCommand } from "../commands/update-movie.command";
-import { PatchMovieCommand } from "../commands/patch-movie.command";
+import { CreateMovieCommand, createMovieCommandSchema } from "../commands/create-movie.command";
+import { UpdateMovieCommand, updateMovieCommandSchema } from "../commands/update-movie.command";
+import { PatchMovieCommand, patchMovieCommandSchema } from "../commands/patch-movie.command";
 import { DeleteMovieCommand } from "../commands/delete-movie.command";
 
 export const movieRoutes = Router();
 
 movieRoutes.post('/', async (request: Request<{}, {}, CreateMovieCommand>, response: Response) => {
-    if (!request.body.name) {
-        response.status(400).send({ error: 'Name is required'});
-        return;
-    }
-    if (!request.body.description) {
-        response.status(400).send({ error: 'Description is required'});
-        return;
-    }
-    if (!request.body.rating) {
-        response.status(400).send({ error: 'Rating is required'});
-    }
-    if (isNaN(request.body.rating)) {
-        response.status(400).send({ error: 'Rating must be a number'});
-        return;
-    }
-    if (request.body.rating < 1 || request.body.rating > 5) {
-        response.status(400).send({ error: 'Rating must be between 1 and 5'});
+    const validationResult = createMovieCommandSchema.safeParse(request.body);
+    if(validationResult.success === false) {
+        response.status(400).send({ errors: validationResult.error.errors });
         return;
     }
 
@@ -69,23 +55,9 @@ movieRoutes.put('/:id', async (request: Request<{ id: string }, {}, UpdateMovieC
         response.status(400).send({ error: 'ID in URL must match ID in body' });
         return;
     }
-    if (!request.body.name) {
-        response.status(400).send({ error: 'Name is required'});
-        return;
-    }
-    if (!request.body.description) {
-        response.status(400).send({ error: 'Description is required'});
-        return;
-    }
-    if (!request.body.rating) {
-        response.status(400).send({ error: 'Rating is required'});
-    }
-    if (isNaN(request.body.rating)) {
-        response.status(400).send({ error: 'Rating must be a number'});
-        return;
-    }
-    if (request.body.rating < 1 || request.body.rating > 5) {
-        response.status(400).send({ error: 'Rating must be between 1 and 5'});
+    const validationResult = updateMovieCommandSchema.safeParse(request.body);
+    if(validationResult.success === false) {
+        response.status(400).send({ errors: validationResult.error.errors });
         return;
     }
 
@@ -111,20 +83,9 @@ movieRoutes.patch('/:id', async (request: Request<{ id: string }, {}, PatchMovie
         response.status(400).send({ error: 'ID in URL must match ID in body' });
         return;
     }
-    if (request.body.name?.length === 0) {
-        response.status(400).send({ error: 'Name is required'});
-        return;
-    }
-    if (request.body.description?.length === 0) {
-        response.status(400).send({ error: 'Description is required'});
-        return;
-    }
-    if (request.body.rating && isNaN(request.body.rating)) {
-        response.status(400).send({ error: 'Rating must be a number'});
-        return;
-    }
-    if (request.body.rating && (request.body.rating < 1 || request.body.rating > 5)) {
-        response.status(400).send({ error: 'Rating must be between 1 and 5'});
+    const validationResult = patchMovieCommandSchema.safeParse(request.body);
+    if(validationResult.success === false) {
+        response.status(400).send({ errors: validationResult.error.errors });
         return;
     }
 
