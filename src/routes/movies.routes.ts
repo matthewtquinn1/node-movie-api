@@ -16,15 +16,9 @@ movieRoutes.post('/', async (request: Request<{}, {}, CreateMovieCommand>, respo
         return;
     }
 
-    try {
-        const [movie] = await db('movies').insert(request.body).returning('*');
-        response.status(201).send(movie);
-        return;
-    } catch (error) {
-        console.error(error);
-        response.status(500).send({ error: 'Failed to create movie.' });
-        return;
-    }
+    const [movie] = await db('movies').insert(request.body).returning('*');
+    response.status(201).send(movie);
+    return;
 });
 
 movieRoutes.get('/', async (_: Request, result: Response) => {
