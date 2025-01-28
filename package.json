@@ -11,10 +11,6 @@
     "db:migrate:make": "knex migrate:make --knexfile ./src/database/knexfile.ts",
     "db:migrate": "knex migrate:latest --knexfile .src/database/knexfile.ts"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/matthewtquinn1/node-movie-api.git"
-  },
   "author": "Matthew Quinn",
   "license": "ISC",
   "bugs": {
