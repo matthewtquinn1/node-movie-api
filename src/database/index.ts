@@ -1,4 +1,4 @@
 import Knex from 'knex';
-import { knexConfig } from './knexfile';
+import * as knexConfig from './knexfile';
 
-export const db = Knex(knexConfig['development']);
+export const db = Knex(knexConfig.default['development']);

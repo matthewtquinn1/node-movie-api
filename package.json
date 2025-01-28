@@ -9,7 +9,7 @@
     "start:dev": "ts-node src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "db:migrate:make": "knex migrate:make --knexfile ./src/database/knexfile.ts",
-    "db:migrate": "knex migrate:latest --knexfile .src/database/knexfile.ts"
+    "db:migrate": "knex migrate:latest --knexfile ./src/database/knexfile.ts"
   },
   "author": "Matthew Quinn",
   "license": "ISC",
