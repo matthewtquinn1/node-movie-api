@@ -7,7 +7,7 @@ import { errorHandler } from './middleware/error-handler';
 const app = express();
 
 // Middleware.
-app.use(cors());
+app.use(cors({ origin: '*' })); // Allow all origins for now.
 app.use(express.json());
 
 // Routes.
